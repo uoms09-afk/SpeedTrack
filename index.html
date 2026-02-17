@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SpeedTrack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="window-bar">
+      <span class="app-dot"></span>
+      <span>SpeedTrack</span>
+      <div class="window-actions"><span>—</span><span>□</span><span>✕</span></div>
+    </div>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand-row">
+          <div class="logo">⏱</div>
+          <div class="brand-title">SpeedTrack</div>
+        </div>
+
+        <nav class="menu" id="menuNav">
+          <button class="menu-btn active" data-tab="dashboard">Dashboard</button>
+          <button class="menu-btn" data-tab="screentime">Screen Time</button>
+          <button class="menu-btn" data-tab="goals">Goals</button>
+          <button class="menu-btn" data-tab="timeline">Timeline</button>
+          <button class="menu-btn" data-tab="export">Export</button>
+          <button class="menu-btn" data-tab="settings">Settings</button>
+        </nav>
+
+      </aside>
+
+      <main class="content">
+        <section class="panel active" id="dashboardPanel">
+          <header class="panel-head">
+            <h1>9h 38m</h1>
+            <button id="focusToggle" class="pill cyan">Focus</button>
+          </header>
+          <p class="muted">TOTAL ACTIVE TIME <span class="green-dot"></span></p>
+
+          <div class="stats-row">
+            <div class="stat-card"><h2 id="productivityScore">43</h2><p>Productivity</p></div>
+            <div class="stat-card"><h2 id="switchesCount">177</h2><p>Switches</p></div>
+            <div class="stat-card"><h2 id="deepBlocks">7</h2><p>Deep blocks</p></div>
+          </div>
+
+          <div class="card-grid">
+            <article class="glass-card">
+              <div class="card-title">Hourly activity</div>
+              <div class="bars" id="hourlyBars"></div>
+            </article>
+            <article class="glass-card">
+              <div class="card-title">Top usage</div>
+              <ul class="top-list" id="topUsage"></ul>
+            </article>
+          </div>
+
+          <article class="glass-card apps-card">
+            <div class="card-title">Applications</div>
+            <div id="appRows"></div>
+          </article>
+        </section>
+
+        <section class="panel" id="screentimePanel">
+          <header class="panel-head compact"><h2>Screen Time</h2></header>
+          <article class="glass-card">
+            <div class="filters">
+              <select id="timeRange">
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+              </select>
+              <select id="categoryFilter">
+                <option value="all">All categories</option>
+                <option value="Productive">Productive</option>
+                <option value="Neutral">Neutral</option>
+                <option value="Distracting">Distracting</option>
+                <option value="Meetings">Meetings</option>
+              </select>
+            </div>
+            <div class="categories" id="categoryStats"></div>
+            <div id="screenTimeRows"></div>
+          </article>
+        </section>
+
+        <section class="panel" id="goalsPanel">
+          <header class="panel-head compact"><h2>Goals</h2></header>
+          <article class="glass-card">
+            <form id="goalForm" class="goal-form">
+              <input name="title" required placeholder="Goal title" />
+              <select name="type">
+                <option value="focus">Focus minutes</option>
+                <option value="sessions">Deep sessions</option>
+                <option value="app-limit">App usage limit</option>
+              </select>
+              <input name="target" required type="number" min="1" placeholder="Target" />
+              <button type="submit" class="pill">Add goal</button>
+            </form>
+            <div id="goalRows"></div>
+          </article>
+        </section>
+
+        <section class="panel" id="timelinePanel">
+          <header class="panel-head compact"><h2>Timeline</h2></header>
+          <article class="glass-card timeline-wrap"><div id="timelineRows"></div></article>
+        </section>
+
+        <section class="panel" id="exportPanel">
+          <header class="panel-head compact"><h2>Export</h2></header>
+          <article class="glass-card export-grid">
+            <select id="exportDataset">
+              <option value="all">All data</option>
+              <option value="apps">Apps only</option>
+              <option value="timeline">Timeline only</option>
+              <option value="goals">Goals only</option>
+            </select>
+            <div class="export-actions">
+              <button id="exportJson" class="pill">Export JSON</button>
+              <button id="exportCsv" class="pill">Export CSV</button>
+            </div>
+            <div class="muted" id="exportMeta">No exports yet.</div>
+            <div id="exportHistory"></div>
+          </article>
+        </section>
+
+        <section class="panel" id="settingsPanel">
+          <header class="panel-head compact"><h2>Settings</h2></header>
+          <article class="glass-card settings-list">
+            <label class="toggle-row"><span>Open at Login</span><input id="openAtLogin" type="checkbox" /></label>
+            <label class="toggle-row"><span>Keystroke Tracking</span><input id="keyTracking" type="checkbox" checked /></label>
+            <label class="toggle-row"><span>Mouse Click Tracking</span><input id="clickTracking" type="checkbox" checked /></label>
+            <label class="toggle-row"><span>Break Reminder (minutes)</span><input id="breakMins" type="number" min="5" value="60" /></label>
+            <div class="danger-row"><button id="clearData" class="pill danger">Clear Data</button></div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

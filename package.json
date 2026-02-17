@@ -1,0 +1,30 @@
+{
+  "name": "speedtrack",
+  "version": "1.0.0",
+  "description": "SpeedTrack desktop productivity tracker",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "start:web": "python3 -m http.server 4173",
+    "build:win": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.speedtrack.desktop",
+    "productName": "SpeedTrack",
+    "files": [
+      "index.html",
+      "styles.css",
+      "app.js",
+      "main.js",
+      "preload.js",
+      "package.json"
+    ],
+    "win": {
+      "target": ["portable"]
+    }
+  }
+}
